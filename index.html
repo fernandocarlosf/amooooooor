@@ -3,34 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Páscoa, Meu Amor 🐰💖</title>
+<title>Para você, Luciene 💖</title>
 
 <style>
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(180deg, #ffdde1, #ee9ca7);
+    color: white;
+    text-align: center;
+}
+
+/* tela inicial */
+#start {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    color: white;
+    font-size: 2em;
+    cursor: pointer;
 }
 
-.container {
-    text-align: center;
-    max-width: 500px;
-    animation: fadeIn 2s ease-in-out;
-}
-
-h1 {
-    font-size: 2.5em;
-}
-
-p {
-    font-size: 1.2em;
-    margin-top: 15px;
+/* conteúdo principal */
+#main {
+    display: none;
+    padding: 20px;
 }
 
 .slideshow {
@@ -54,55 +51,94 @@ p {
     opacity: 1;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+#text {
+    font-size: 1.2em;
+    min-height: 80px;
+    margin-top: 20px;
 }
 
-.hearts {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.heart {
-    position: absolute;
-    color: rgba(255,255,255,0.7);
-    animation: float 6s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh); }
-    100% { transform: translateY(-10vh); }
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #ff6f91;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Feliz Páscoa, meu amor 🐰💖</h1>
+<!-- TELA INICIAL -->
+<div id="start" onclick="startExperience()">
+    💖 Clique para abrir sua surpresa 💖
+</div>
 
+<!-- CONTEÚDO -->
+<div id="main">
+    <h1>Feliz Páscoa, Luciene 🐰💖</h1>
+
+    <!-- FOTOS -->
     <div class="slideshow">
         <img class="slide active" src="https://via.placeholder.com/250?text=Foto+1">
         <img class="slide" src="https://via.placeholder.com/250?text=Foto+2">
         <img class="slide" src="https://via.placeholder.com/250?text=Foto+3">
     </div>
 
-    <p>
-        Assim como a Páscoa simboliza recomeço, você é o meu motivo diário de felicidade.
-        Cada momento ao seu lado é um presente que eu nunca quero perder.
-    </p>
+    <!-- TEXTO -->
+    <div id="text"></div>
 
-    <p>
-        Te amo hoje, amanhã e sempre ❤️
-    </p>
+    <!-- BOTÃO FINAL -->
+    <button onclick="showFinal()">💌 Ver mensagem final</button>
+
+    <div id="final" style="display:none; margin-top:20px;">
+        <h2>Você é o melhor presente da minha vida ❤️</h2>
+        <p>Te amo hoje, amanhã e sempre 💖</p>
+    </div>
 </div>
 
-<div class="hearts" id="hearts"></div>
-
 <script>
+// iniciar experiência
+function startExperience() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    startTyping();
+}
+
+// efeito digitação
+const messages = [
+    "Desde que você entrou na minha vida...",
+    "Tudo ficou mais leve, mais bonito...",
+    "E muito mais feliz 💖",
+    "Cada momento ao seu lado vale tudo pra mim..."
+];
+
+let msgIndex = 0;
+let charIndex = 0;
+
+function startTyping() {
+    const element = document.getElementById("text");
+    const currentMessage = messages[msgIndex];
+
+    if (charIndex < currentMessage.length) {
+        element.innerHTML += currentMessage.charAt(charIndex);
+        charIndex++;
+        setTimeout(startTyping, 50);
+    } else {
+        setTimeout(() => {
+            element.innerHTML = "";
+            charIndex = 0;
+            msgIndex++;
+            if (msgIndex < messages.length) {
+                startTyping();
+            }
+        }, 2000);
+    }
+}
+
 // slideshow
 let slides = document.querySelectorAll('.slide');
 let index = 0;
@@ -113,21 +149,10 @@ setInterval(() => {
     slides[index].classList.add('active');
 }, 3000);
 
-// corações animados
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerText = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-    document.getElementById('hearts').appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
+// mensagem final
+function showFinal() {
+    document.getElementById("final").style.display = "block";
 }
-
-setInterval(createHeart, 500);
 </script>
 
 </body>
