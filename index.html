@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para você, Luciene ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #1e1e2f, #ff758c);
+    color: white;
+    text-align: center;
+}
+
+/* tela inicial */
+#start {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+/* conteúdo */
+#main {
+    display: none;
+    padding: 20px;
+}
+
+.slideshow {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 20px auto;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+#text {
+    font-size: 1.3em;
+    min-height: 100px;
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- INÍCIO -->
+<div id="start" onclick="startExperience()">
+    ❤️ Clique para abrir nossa história ❤️
+</div>
+
+<!-- CONTEÚDO -->
+<div id="main">
+    <h1>Feliz 7 anos de casamento, Luciene 💍❤️</h1>
+
+    <!-- FOTOS -->
+    <div class="slideshow">
+        <img class="slide active" src="https://via.placeholder.com/260?text=Foto+1">
+        <img class="slide" src="https://via.placeholder.com/260?text=Foto+2">
+        <img class="slide" src="https://via.placeholder.com/260?text=Foto+3">
+    </div>
+
+    <!-- TEXTO -->
+    <div id="text"></div>
+
+    <!-- FINAL -->
+    <button onclick="showFinal()">💌 Ver minha mensagem pra você</button>
+
+    <div id="final" style="display:none; margin-top:20px;">
+        <h2>7 anos ao seu lado... e eu escolheria você todas as vezes ❤️</h2>
+        <p>
+            Obrigado por tudo que vivemos até aqui.  
+            Você é minha parceira, minha paz e meu amor.  
+            E eu quero viver ainda muito mais ao seu lado 💖
+        </p>
+    </div>
+</div>
+
+<script>
+// iniciar
+function startExperience() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    startTyping();
+}
+
+// mensagens
+const messages = [
+    "7 anos atrás nós dissemos 'sim'...",
+    "E desde então, minha vida nunca mais foi a mesma...",
+    "Porque eu ganhei você ❤️",
+    "Cada momento ao seu lado é um presente...",
+    "E cada dia eu tenho mais certeza...",
+    "Que foi a melhor escolha da minha vida 💍"
+];
+
+let msgIndex = 0;
+let charIndex = 0;
+
+function startTyping() {
+    const element = document.getElementById("text");
+    const currentMessage = messages[msgIndex];
+
+    if (charIndex < currentMessage.length) {
+        element.innerHTML += currentMessage.charAt(charIndex);
+        charIndex++;
+        setTimeout(startTyping, 50);
+    } else {
+        setTimeout(() => {
+            element.innerHTML = "";
+            charIndex = 0;
+            msgIndex++;
+            if (msgIndex < messages.length) {
+                startTyping();
+            }
+        }, 2500);
+    }
+}
+
+// slideshow
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}, 3000);
+
+// final
+function showFinal() {
+    document.getElementById("final").style.display = "block";
+}
+</script>
+
+</body>
+</html>
