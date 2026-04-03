@@ -12,6 +12,7 @@ body {
     background: linear-gradient(180deg, #1e1e2f, #ff758c);
     color: white;
     text-align: center;
+    overflow-x: hidden;
 }
 
 /* tela inicial */
@@ -57,10 +58,17 @@ body {
     opacity: 1;
 }
 
+/* texto animado */
 #text {
     font-size: 1.3em;
     min-height: 100px;
     margin-top: 20px;
+    animation: fadeText 1s ease-in-out;
+}
+
+@keyframes fadeText {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 button {
@@ -74,10 +82,34 @@ button {
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
+
+/* corações */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.7);
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
+
+<!-- corações -->
+<div class="hearts" id="hearts"></div>
 
 <!-- INÍCIO -->
 <div id="start" onclick="startExperience()">
@@ -165,10 +197,27 @@ setInterval(() => {
     slides[index].classList.add('active');
 }, 3000);
 
-// final
+// mensagem final
 function showFinal() {
     document.getElementById("final").style.display = "block";
 }
+
+// corações animados
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 400);
 </script>
 
 </body>
