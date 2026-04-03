@@ -30,11 +30,15 @@ body {
     padding: 20px;
 }
 
+/* slideshow */
 .slideshow {
     position: relative;
     width: 260px;
     height: 260px;
     margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide {
@@ -43,8 +47,10 @@ body {
     height: 100%;
     border-radius: 20px;
     object-fit: cover;
+    object-position: center;
     opacity: 0;
     transition: opacity 1s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .slide.active {
@@ -66,6 +72,7 @@ button {
     color: white;
     font-size: 1em;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -84,8 +91,8 @@ button {
     <!-- FOTOS -->
     <div class="slideshow">
         <img class="slide active" src="20150523_190334_Original.jpeg">
-        <img class="slide" src="_DSC0187_Original.jpegtext=Foto+2">
-        <img class="slide" src="IMG_20190811_001518025_Original.jpegtext=Foto+3">
+        <img class="slide" src="_DSC0187_Original.jpeg">
+        <img class="slide" src="IMG_20190811_001518025_Original.jpeg">
         <img class="slide" src="IMG_0853.jpeg">
         <img class="slide" src="IMG_1410.jpeg">
         <img class="slide" src="IMG_1885 Copy.jpeg">
